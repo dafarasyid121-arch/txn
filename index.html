@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Texnovolt Class</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Hanken+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050505; --panel:#121212; --line:#2a2118;
+  --orange:#d4570a; --orange2:#a83f00; --text:#f2ece6; --muted:#a39a90;
+  --head:'Chakra Petch',system-ui,sans-serif; --body:'Hanken Grotesk',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.6}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* Navigasi */
+nav{position:sticky;top:0;z-index:20;background:rgba(5,5,5,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--head);font-weight:700;font-size:1.15rem}
+.brand svg,.brand img{width:34px;height:34px}
+.links{display:flex;gap:6px}
+.links a{padding:8px 14px;border-radius:6px;color:var(--muted);font-weight:500}
+.links a:hover{color:var(--text);background:var(--panel)}
+.burger{display:none;background:none;border:1px solid var(--line);color:var(--text);width:42px;height:38px;border-radius:6px;font-size:1.2rem;cursor:pointer}
+
+/* Hero */
+.hero{padding:84px 0 72px;border-bottom:1px solid var(--line);
+  background:linear-gradient(135deg,transparent 60%,rgba(212,87,10,.18) 60%,rgba(212,87,10,.18) 62%,transparent 62%),var(--bg)}
+.hero h1{font-family:var(--head);font-size:clamp(2.6rem,9vw,5.6rem);line-height:1;letter-spacing:-.02em;max-width:11ch}
+.hero h1 span{color:var(--orange)}
+.hero p{margin-top:20px;max-width:46ch;color:var(--muted);font-size:1.1rem}
+.btn{display:inline-flex;align-items:center;gap:10px;margin-top:28px;padding:13px 22px;border-radius:8px;background:var(--orange);color:#fff;font-weight:700;border:0;cursor:pointer;font:inherit;font-weight:700}
+.btn:hover{background:var(--orange2)}
+
+/* Section */
+section{padding:64px 0;border-bottom:1px solid var(--line)}
+h2{font-family:var(--head);font-size:2rem;margin-bottom:28px;padding-left:14px;border-left:5px solid var(--orange)}
+.empty{color:var(--muted);padding:24px;border:1px dashed var(--line);border-radius:10px}
+
+/* Berita */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.card img{width:100%;aspect-ratio:16/10;object-fit:cover;background:#1b1b1b}
+.card .b{padding:18px}
+.card time{color:var(--orange);font-size:.85rem;font-weight:700}
+.card h3{font-family:var(--head);font-size:1.2rem;margin:4px 0 8px;line-height:1.3}
+.card p{color:var(--muted);font-size:.95rem;white-space:pre-line}
+
+/* Jadwal */
+.jadwal{display:grid;gap:12px}
+.jrow{display:grid;grid-template-columns:130px 1fr;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--orange);border-radius:8px}
+.jrow .d{padding:16px;font-family:var(--head);font-weight:700;color:var(--orange)}
+.jrow .t{padding:16px;border-left:1px solid var(--line)}
+.jrow h3{font-family:var(--head);font-size:1.1rem}
+.jrow p{color:var(--muted);font-size:.95rem;white-space:pre-line}
+
+/* Galeri */
+.gal{columns:3 220px;column-gap:12px}
+.gal figure{break-inside:avoid;margin-bottom:12px;position:relative;cursor:zoom-in;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.gal img{width:100%;display:block;transition:transform .3s}
+.gal figure:hover img{transform:scale(1.04)}
+.gal figcaption{position:absolute;inset:auto 0 0 0;padding:26px 12px 10px;background:linear-gradient(transparent,rgba(0,0,0,.85));font-size:.9rem}
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;flex-direction:column;gap:12px}
+.lb.on{display:flex}
+.lb img{max-width:100%;max-height:82vh;border-radius:6px}
+.lb button{position:absolute;top:14px;right:18px;background:var(--orange);color:#fff;border:0;border-radius:6px;width:42px;height:42px;font-size:1.3rem;cursor:pointer}
+
+/* Kontak */
+.kontak{display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:26px}
+.ig{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--orange),var(--orange2));display:grid;place-items:center;flex:none}
+.ig:hover{filter:brightness(1.15)}
+.ig svg{width:34px;height:34px;fill:none;stroke:#fff;stroke-width:2}
+.kontak b{font-family:var(--head);font-size:1.2rem}
+.kontak p{color:var(--muted)}
+footer{padding:28px 0;text-align:center;color:var(--muted);font-size:.9rem}
+
+@media(max-width:700px){
+  .burger{display:block}
+  .links{display:none;position:absolute;top:60px;left:0;right:0;flex-direction:column;background:#050505;border-bottom:1px solid var(--line);padding:10px 20px}
+  .links.on{display:flex}
+  .jrow{grid-template-columns:1fr}.jrow .t{border-left:0;border-top:1px solid var(--line)}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="#beranda" class="brand" id="brand"></a>
+    <button class="burger" id="burger" aria-label="Buka menu">☰</button>
+    <div class="links" id="links">
+      <a href="#beranda">Beranda</a>
+      <a href="#berita">Berita</a>
+      <a href="#jadwal">Jadwal</a>
+      <a href="#galeri">Galeri</a>
+      <a href="#kontak">Kontak</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="beranda">
+  <div class="wrap">
+    <h1>Texnovolt <span>Class</span></h1>
+    <p>Tempat kami belajar, berkarya, dan tumbuh bersama. Ikuti berita, jadwal, dan foto kegiatan kelas di sini.</p>
+    <a class="btn" href="#berita">Lihat berita terbaru</a>
+  </div>
+</header>
+
+<section id="berita"><div class="wrap">
+  <h2>Berita</h2>
+  <div class="grid" id="listBerita"><div class="empty">Memuat berita…</div></div>
+</div></section>
+
+<section id="jadwal"><div class="wrap">
+  <h2>Jadwal</h2>
+  <div class="jadwal" id="listJadwal"><div class="empty">Memuat jadwal…</div></div>
+</div></section>
+
+<section id="galeri"><div class="wrap">
+  <h2>Galeri kegiatan</h2>
+  <div class="gal" id="listGaleri"><div class="empty">Memuat foto…</div></div>
+</div></section>
+
+<section id="kontak"><div class="wrap">
+  <h2>Kontak</h2>
+  <div class="kontak">
+    <a class="ig" href="https://www.instagram.com/texnovolt_class" target="_blank" rel="noopener" aria-label="Buka Instagram Texnovolt Class">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="#fff"/></svg>
+    </a>
+    <div>
+      <b>@texnovolt_class</b>
+      <p>Ketuk ikon Instagram untuk menghubungi kami.</p>
+    </div>
+  </div>
+</div></section>
+
+<footer>© <span id="yr"></span> Texnovolt Class</footer>
+
+<div class="lb" id="lb"><button id="lbx" aria-label="Tutup">×</button><img id="lbi" alt=""></div>
+
+<script>
+/* ====== PENGATURAN ======
+   LOGO_URL  : isi link gambar logo kelas (kosong = pakai logo petir bawaan)
+   API_URL   : isi HANYA kalau web ini ditaruh di GitHub/Google Sites.
+               Isi dengan link Web App Apps Script + "?api=1"
+               contoh: https://script.google.com/macros/s/XXXX/exec?api=1 */
+const LOGO_URL = '';
+const API_URL  = '';
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+// Logo
+$('brand').innerHTML = (LOGO_URL ? `<img src="${esc(LOGO_URL)}" alt="Logo">` :
+  `<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="#d4570a"/><path d="M23 6 11 22h8l-2 12 12-17h-8z" fill="#050505"/></svg>`) + 'Texnovolt';
+$('yr').textContent = new Date().getFullYear();
+
+// Menu HP
+$('burger').onclick = () => $('links').classList.toggle('on');
+$('links').onclick = () => $('links').classList.remove('on');
+
+// Link gambar: otomatis ubah link Google Drive jadi gambar langsung
+function img(u){
+  u = (u||'').trim(); if(!u) return '';
+  const m = u.match(/\/d\/([\w-]+)/) || u.match(/[?&]id=([\w-]+)/);
+  if (m && u.includes('drive.google')) return 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w1200';
+  return u;
+}
+function tgl(s){
+  const d = new Date(s); if (isNaN(d)) return esc(s);
+  return d.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
+}
+const ts = s => { const d = new Date(s); return isNaN(d) ? 0 : d.getTime(); };
+
+function render(data){
+  const by = k => data.filter(r => r.kategori === k);
+  const berita = by('berita').sort((a,b) => ts(b.tanggal) - ts(a.tanggal));
+  const jadwal = by('jadwal').sort((a,b) => ts(a.tanggal) - ts(b.tanggal));
+  const galeri = by('galeri').sort((a,b) => ts(b.tanggal) - ts(a.tanggal));
+
+  $('listBerita').innerHTML = berita.length ? berita.map(r => `
+    <article class="card">
+      ${r.gambar ? `<img loading="lazy" src="${esc(img(r.gambar))}" alt="${esc(r.judul)}" onerror="this.remove()">` : ''}
+      <div class="b"><time>${tgl(r.tanggal)}</time><h3>${esc(r.judul)}</h3><p>${esc(r.isi)}</p></div>
+    </article>`).join('') : '<div class="empty">Belum ada berita. Tambahkan baris dengan kategori "berita" di spreadsheet.</div>';
+
+  $('listJadwal').innerHTML = jadwal.length ? jadwal.map(r => `
+    <div class="jrow"><div class="d">${tgl(r.tanggal)}</div>
+    <div class="t"><h3>${esc(r.judul)}</h3><p>${esc(r.isi)}</p></div></div>`).join('')
+    : '<div class="empty">Belum ada jadwal. Tambahkan baris dengan kategori "jadwal" di spreadsheet.</div>';
+
+  const foto = galeri.filter(r => r.gambar);
+  $('listGaleri').innerHTML = foto.length ? foto.map(r => `
+    <figure data-src="${esc(img(r.gambar))}">
+      <img loading="lazy" src="${esc(img(r.gambar))}" alt="${esc(r.judul)}">
+      ${r.judul ? `<figcaption>${esc(r.judul)}</figcaption>` : ''}
+    </figure>`).join('') : '<div class="empty">Belum ada foto. Tambahkan baris dengan kategori "galeri" di spreadsheet.</div>';
+}
+
+function gagal(){
+  ['listBerita','listJadwal','listGaleri'].forEach(i => $(i).innerHTML = '<div class="empty">Data gagal dimuat. Coba muat ulang halaman.</div>');
+}
+
+// Ambil data
+if (typeof google !== 'undefined' && google.script && google.script.run) {
+  google.script.run.withSuccessHandler(render).withFailureHandler(gagal).getData();
+} else if (API_URL) {
+  fetch(API_URL).then(r => r.json()).then(render).catch(gagal);
+} else { gagal(); }
+
+// Lightbox galeri
+$('listGaleri').onclick = e => {
+  const f = e.target.closest('figure'); if(!f) return;
+  $('lbi').src = f.dataset.src; $('lb').classList.add('on');
+};
+$('lb').onclick = () => $('lb').classList.remove('on');
+document.addEventListener('keydown', e => { if(e.key==='Escape') $('lb').classList.remove('on'); });
+</script>
+</body>
+</html>
